@@ -55,6 +55,9 @@ ENV WRANGLER_SEND_METRICS=false \
 RUN mkdir -p /root/.config/.wrangler && \
     echo '{"enabled":false}' > /root/.config/.wrangler/metrics.json
 
+# Set Node.js memory limit for build
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
 RUN pnpm run build
 
 CMD [ "pnpm", "run", "dockerstart"]
